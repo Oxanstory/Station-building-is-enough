@@ -97,7 +97,9 @@ export const useNativeDenoms = () => {
       legacyWhitelist[denom] ??
       cw20.find(({ token }) => denom === token) ??
       // that's needed for axl tokens
-      Object.values(whitelist[networkName]).find((t) => t.token === denom) ?? {
+      Object.values(whitelist?.[networkName] ?? {}).find(
+        (t) => t.token === denom
+      ) ?? {
         // default token icon
         token: denom,
         symbol: fixedDenom,
